@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% block body %}
+{% include 'component/header.html' %}
+
+<button class="py-2 px-4 text-white bg-blue-600 my-2 rounded-lg ml-2 hover:bg-blue-700" onclick="location.href='add/'" type="button">เพิ่มงานที่ต้องทำ</button>
+<div class="overflow-x-auto relative shadow-md">
+    <table class="w-full text-sm text-left text-white font-light">
+        <thead class="text-xs text-white bg-gray-50 dark:bg-gray-700 text-base">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    หัวข้อ
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    รายละเอียด
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    ครบกำหนด
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    สถานะ
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in todo %}
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ t.title }}
+                </th>
+                <td class="py-4 px-6">
+                    {{ t.description }}
+                </td>
+                <td class="py-4 px-6">
+                    {{ t.deadline }}
+                </td>
+                <td class="py-4 px-6">
+                    {% if t.done %}
+                    <p class="text-green-500">เสร็จแล้ว</p> 
+                    {% else %}
+                    <p class="text-red-500">ยังไม่เสร็จ</p>
+                    {% endif %}
+                </td>
+                <td class="py-4 px-6">
+                    <a href="/edit/{{ t.id }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
